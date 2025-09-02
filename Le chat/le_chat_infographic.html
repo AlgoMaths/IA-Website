@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Le Chat de Mistral — Infographie pédagogique</title>
+  <meta name="description" content="Assistant IA francophone et souverain : confidentialité, efficacité et usages pédagogiques avec Le Chat de Mistral." />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- Tailwind + dark mode -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> tailwind.config = { darkMode: 'class' };</script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root { color-scheme: light dark; }
+    html, body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial; }
+    .glass { backdrop-filter: saturate(1.2) blur(10px); background: rgba(255,255,255,0.75); }
+    .dark .glass { background: rgba(17,24,39,0.6); }
+    .text-justify { text-align: justify; }
+
+    .chart-container { position: relative; width: 100%; max-width: 680px; margin: 0 auto; height: 320px; }
+    @media (min-width: 768px) { .chart-container { height: 360px; } }
+
+    @media print {
+      .print-hidden { display: none !important; }
+      .container { max-width: none !important; padding: 0 !important; }
+      .chart-container { height: 300px !important; max-height: 300px !important; }
+      .text-3xl { font-size: 1.5rem !important; }
+      .text-xl { font-size: 1.1rem !important; }
+      .p-6 { padding: 1rem !important; }
+      .my-2 { margin-top: .5rem !important; margin-bottom: .5rem !important; }
+      body { line-height: 1.3; }
+    }
+  </style>
+</head>
+
+<body class="antialiased bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100">
+  <!-- Skip link -->
+  <a href="#contenu" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 px-3 py-2 rounded-md shadow">Aller au contenu</a>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 border-b border-slate-200/70 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/70 glass print-hidden">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-sky-500 text-white font-black">IA</span>
+        <span class="font-extrabold tracking-tight">IA & Éducation</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="../index_ia.html" class="inline-flex items-center rounded-full bg-sky-600 text-white px-4 py-2 text-sm font-semibold shadow hover:bg-sky-700" title="Retour à l’accueil">← Accueil</a>
+        <a href="https://mistral.ai/" target="_blank" class="hidden sm:inline-flex items-center rounded-full border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">Visiter Le Chat de Mistral</a>
+        <button id="themeToggle" aria-label="Activer/désactiver le thème" class="inline-flex items-center gap-2 rounded-full border border-slate-300 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
+          <span id="themeIcon">🌞</span><span class="hidden sm:inline">Thème</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+<!-- Crédit + avatar (sous la barre de menu) -->
+<div class="bg-transparent">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="mt-3 mb-0 flex items-center gap-3 text-left">
+      <img
+        src="../Avatar.png"
+        alt="Avatar de Christophe Navaux"
+        width="75" height="75"
+        class="shrink-0 object-cover rounded-md ring-1 ring-slate-900/10 dark:ring-white/10"
+        style="width:2cm;height:2cm;"
+        loading="lazy"
+      />
+      <p class="text-sm md:text-base font-bold text-slate-700 dark:text-slate-200 leading-snug">
+        Website réalisé par Christophe Navaux — EF2D de Mathématiques, zone Proche-orient.
+      </p>
+    </div>
+  </div>
+</div>
+
+  <!-- Hero -->
+  <section class="relative">
+    <div class="max-w-6xl mx-auto px-4 py-10 md:py-14 grid md:grid-cols-5 gap-8 items-center">
+      <div class="md:col-span-3">
+        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
+          Le Chat de Mistral : <span class="text-rose-600">souverain, efficace, francophone</span>
+        </h1>
+        <p class="mt-4 text-base md:text-lg text-slate-600 dark:text-slate-300 text-justify">
+          Une alternative européenne, respectueuse du RGPD, performante et adaptée à l’école. Idéal pour la synthèse, l’explication et la création de supports pédagogiques.
+        </p>
+        <div class="mt-6 flex flex-col sm:flex-row gap-3 print-hidden">
+          <a href="https://mistral.ai/" target="_blank" class="inline-flex items-center justify-center rounded-lg bg-rose-600 text-white px-5 py-3 font-semibold shadow hover:bg-rose-700">Visiter Le Chat</a>
+          <button onclick="window.print()" class="inline-flex items-center justify-center rounded-lg border border-slate-300 dark:border-slate-700 px-5 py-3 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">Imprimer / PDF</button>
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <img src="./visuel_mistral.jpg" alt="Illustration Le Chat de Mistral" class="w-full h-auto rounded-xl shadow-lg ring-1 ring-slate-900/5">
+      </div>
+    </div>
+  </section>
+
+  <main id="contenu" class="max-w-6xl mx-auto px-4">
+    <!-- Souveraineté numérique (flow) -->
+    <section id="sovereignty" class="mb-12">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-center mb-6">Souveraineté numérique & confidentialité</h2>
+      <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+        <p class="text-slate-700 dark:text-slate-300 mb-6 text-justify">
+          Conçu en Europe et conforme au RGPD, Le Chat garantit une haute confidentialité. Un cadre rassurant pour les enseignants, élèves et personnels administratifs.
+        </p>
+        <div class="flex flex-col md:flex-row items-center justify-around text-center">
+          <div class="p-4">
+            <div class="bg-rose-100 dark:bg-rose-900/30 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-4xl">👤</div>
+            <p class="font-semibold text-lg text-rose-700 dark:text-rose-300">Données Utilisateur</p>
+          </div>
+          <div class="text-2xl opacity-70 transform rotate-90 md:rotate-0 my-2 md:my-0">→</div>
+          <div class="p-4 border-4 border-dashed border-rose-400/70 rounded-lg">
+            <div class="bg-rose-300/70 dark:bg-rose-800 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-4xl">🇪🇺</div>
+            <p class="font-semibold text-lg text-rose-700 dark:text-rose-300">Serveurs Europe</p>
+            <p class="text-sm text-slate-600 dark:text-slate-400">(Conforme RGPD)</p>
+          </div>
+          <div class="text-2xl opacity-70 transform rotate-90 md:rotate-0 my-2 md:my-0">→</div>
+          <div class="p-4">
+            <div class="bg-rose-600 text-white rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-2 text-4xl">✅</div>
+            <p class="font-semibold text-lg text-rose-700 dark:text-rose-300">Sécurité renforcée</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audio -->
+    <section id="audio-section" class="my-12">
+      <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6 text-center">
+        <h2 class="text-2xl font-extrabold mb-2">Un podcast pour approfondir</h2>
+        <p class="text-slate-700 dark:text-slate-300 text-justify mb-4">Écoutez une capsule audio sur les avantages du Chat dans l’environnement scolaire.</p>
+        <div class="flex justify-center">
+          <audio controls class="w-full max-w-sm">
+            <source src="./podcast_mistral.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'élément audio.
+          </audio>
+        </div>
+      </div>
+    </section>
+
+    <!-- Efficacité & sobriété -->
+    <section id="efficiency" class="mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+          <h2 class="text-xl font-extrabold text-rose-700 dark:text-rose-300 mb-2">Efficacité & sobriété énergétique</h2>
+          <p class="text-slate-700 dark:text-slate-300 mb-3 text-justify">
+            Les modèles Mistral sont optimisés pour des coûts de calcul réduits et des réponses rapides — une approche plus durable sans sacrifier la qualité.
+          </p>
+        </div>
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+          <div class="chart-container"><canvas id="efficiencyChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Cas d'usage -->
+    <section id="use-cases" class="mb-12">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-center mb-6">Des applications concrètes pour l’éducation</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+          <h3 class="text-xl font-extrabold text-rose-700 dark:text-rose-300 mb-2">Enseignants</h3>
+          <p class="text-slate-700 dark:text-slate-300 mb-3 text-justify text-sm">Création de supports, génération d’exercices, simplification de notions complexes.</p>
+          <div class="chart-container"><canvas id="teacherChart"></canvas></div>
+        </div>
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+          <h3 class="text-xl font-extrabold text-rose-700 dark:text-rose-300 mb-2">Élèves</h3>
+          <p class="text-slate-700 dark:text-slate-300 mb-3 text-justify text-sm">Tuteur virtuel pour réviser, brainstormer et obtenir des explications claires.</p>
+          <div class="chart-container"><canvas id="studentChart"></canvas></div>
+        </div>
+      </div>
+      <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+        <h3 class="text-xl font-extrabold text-rose-700 dark:text-rose-300 mb-2">Administration (PERDIR)</h3>
+        <p class="text-slate-700 dark:text-slate-300 mb-3 text-justify text-sm">Synthèse de documents sensibles, rédaction de notes et communications stratégiques.</p>
+        <div class="chart-container"><canvas id="adminChart"></canvas></div>
+      </div>
+    </section>
+
+  
+    <!-- Capsule YouTube -->
+    <section id="youtube-section" class="mb-12">
+      <div class="rounded-2xl bg-gradient-to-r from-sky-600 via-cyan-500 to-emerald-500 p-[1px]">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 p-6 md:p-8 text-center">
+          <h2 class="text-2xl font-extrabold text-rose-700 dark:text-rose-300 mb-4">Découvrez Le Chat en vidéo</h2>
+          <p class="text-slate-700 dark:text-slate-300 text-justify mb-4">
+            Démonstrations et cas d’usage avancés de Le Chat de Mistral sur ma chaîne YouTube.
+          </p>
+          <div class="w-full aspect-video rounded-lg overflow-hidden shadow mb-4 ring-1 ring-slate-900/10 dark:ring-slate-50/10">
+            <iframe class="w-full h-full"
+              src="https://www.youtube.com/embed/zP-ByP1_V_s"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+          <a href="https://youtube.com/@christophe_navaux?si=x1OQiYlKP8oSXchN" target="_blank" rel="noopener"
+             class="inline-flex items-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition-colors duration-300">
+            Visiter ma chaîne YouTube
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-10 border-t border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 py-8 text-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <p class="text-slate-500">© <span id="year"></span> IA & Éducation — Le Chat de Mistral.</p>
+      <div class="flex gap-4">
+        <a href="../index_ia.html" class="hover:text-rose-600">Accueil</a>
+        <a href="#use-cases" class="hover:text-rose-600">Cas d’usage</a>
+        <a href="#efficiency" class="hover:text-rose-600">Efficacité</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // === Thème (V-C-A) ===
+    (function initTheme(){
+      const html = document.documentElement;
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+      html.classList.toggle('dark', theme === 'dark');
+      const icon = document.getElementById('themeIcon');
+      if (icon) icon.textContent = theme === 'dark' ? '🌙' : '🌞';
+    })();
+
+    (function bindThemeToggle(){
+      const btn = document.getElementById('themeToggle');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const html = document.documentElement;
+        const nowDark = !html.classList.contains('dark');
+        html.classList.toggle('dark', nowDark);
+        localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+        const icon = document.getElementById('themeIcon');
+        if (icon) icon.textContent = nowDark ? '🌙' : '🌞';
+      });
+    })();
+
+    // Année courante
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ==== Charts (données inspirées de ton fichier) ====
+    const tooltipTitleCallback = {
+      plugins: { tooltip: { callbacks: {
+        title: function(tooltipItems) {
+          const item = tooltipItems[0];
+          let label = item.chart.data.labels[item.dataIndex];
+          return Array.isArray(label) ? label.join(' ') : label;
+        } } } }
+    };
+    const wrapLabel = (str, maxWidth = 16) => {
+      if (str.length <= maxWidth) return str;
+      const words = str.split(' ');
+      let lines = [], current = '';
+      for (const w of words) {
+        if ((current + w).length > maxWidth) { lines.push(current.trim()); current=''; }
+        current += w + ' ';
+      }
+      lines.push(current.trim());
+      return lines;
+    };
+
+    // Efficacité énergétique (bar horizontale)
+    new Chart(document.getElementById('efficiencyChart').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: ['Modèle standard', 'Modèle Mistral'],
+        datasets: [{
+          label: 'Consommation par requête (rel.)',
+          data: [100, 45],
+          backgroundColor: ['#f43f5e', '#fb7185'],
+          borderRadius: 5,
+          barPercentage: 0.6
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        scales: { x: { beginAtZero: true, max: 120 } },
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: "Comparaison de l'efficacité énergétique",
+                   font: { size: 16, weight: 'bold' }, color: '#be123c', padding: { bottom: 15 } },
+          ...tooltipTitleCallback.plugins
+        }
+      }
+    });
+
+    // Enseignants
+    const teacherLabels = ['Préparation de cours','Création d’exercices','Recherche documentaire','Communication'].map(l=>wrapLabel(l));
+    new Chart(document.getElementById('teacherChart').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: teacherLabels,
+        datasets: [{
+          label: 'Temps économisé estimé (%)',
+          data: [40, 50, 30, 25],
+          backgroundColor: ['#f43f5e', '#fb7185', '#fecdd3', '#ffe4e6'],
+          borderRadius: 5
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true, max: 60 } },
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Gain de temps pour les enseignants',
+                   font: { size: 16, weight: 'bold' }, color: '#be123c', padding: { bottom: 15 } },
+          ...tooltipTitleCallback.plugins
+        }
+      }
+    });
+
+    // Élèves
+    new Chart(document.getElementById('studentChart').getContext('2d'), {
+      type: 'radar',
+      data: {
+        labels: ['Autonomie','Pensée critique','Recherche','Révision','Créativité'],
+        datasets: [{
+          label: 'Compétences renforcées',
+          data: [9, 8, 8.5, 9.5, 7],
+          backgroundColor: 'rgba(244,63,94,.2)',
+          borderColor: '#f43f5e',
+          pointBackgroundColor: '#f43f5e'
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: { r: { suggestedMin: 0, suggestedMax: 10, pointLabels: { font: { size: 12 } } } },
+        plugins: {
+          title: { display: true, text: 'Impact sur les compétences des élèves',
+                   font: { size: 16, weight: 'bold' }, color: '#be123c', padding: { bottom: 15 } },
+          ...tooltipTitleCallback.plugins
+        }
+      }
+    });
+
+    // Administration (donut)
+    new Chart(document.getElementById('adminChart').getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Synthèse de rapports','Rédaction de notes','Prise de décision','Veille stratégique'],
+        datasets: [{
+          data: [40, 25, 20, 15],
+          backgroundColor: ['#f43f5e', '#fb7185', '#fecdd3', '#ffe4e6'],
+          borderColor: '#FFFFFF', borderWidth: 5
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '70%',
+        plugins: {
+          legend: { position: 'bottom' },
+          title: { display: true, text: 'Optimisation des tâches administratives',
+                   font: { size: 16, weight: 'bold' }, color: '#be123c', padding: { bottom: 15 } },
+          ...tooltipTitleCallback.plugins
+        }
+      }
+    });
+  </script>
+</body>
+</html>

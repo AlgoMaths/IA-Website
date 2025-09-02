@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IA & Éducation — Explorer les Outils</title>
+  <meta name="description" content="Panorama clair et pratique des outils d'IA utiles à l'école : NotebookLM, Napkin.ai, DuckDuckGo AI Chat, et Le Chat de Mistral. Comparatifs, infographies, exemples pédagogiques et FAQ." />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="IA & Éducation — Explorer les Outils" />
+  <meta property="og:description" content="Comparatifs, infographies et usages concrets de l'IA à l'école." />
+  <meta property="og:type" content="website" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { darkMode: 'class' };
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root { color-scheme: light dark; }
+    html, body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; }
+    .glass { backdrop-filter: saturate(1.2) blur(10px); background: rgba(255,255,255,0.75); }
+    .dark .glass { background: rgba(17,24,39,0.6); }
+  </style>
+</head>
+
+<body class="antialiased bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100">
+  <a href="#contenu" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 px-3 py-2 rounded-md shadow">Aller au contenu</a>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 border-b border-slate-200/70 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/70 glass">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-sky-500 text-white font-black">IA</span>
+        <span class="font-extrabold tracking-tight">IA & Éducation</span>
+      </div>
+      <ul class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <li><a href="#intro" class="hover:text-sky-600">Introduction</a></li>
+        <li><a href="#outils" class="hover:text-sky-600">Outils</a></li>
+        <li><a href="#comparatif" class="hover:text-sky-600">Comparatif</a></li>
+        <li><a href="#faq" class="hover:text-sky-600">FAQ</a></li>
+      </ul>
+      <div class="flex items-center gap-2">
+        <button id="themeToggle" aria-label="Activer/désactiver le thème" class="inline-flex items-center gap-2 rounded-full border border-slate-300 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
+          <span id="themeIcon">🌞</span><span class="hidden sm:inline">Thème</span>
+        </button>
+        <a href="#infographies" class="hidden sm:inline-flex items-center rounded-full bg-sky-600 text-white px-4 py-2 text-sm font-semibold shadow hover:bg-sky-700">Infographies</a>
+      </div>
+    </nav>
+  </header>
+<!-- Crédit + avatar (sous la barre de menu) -->
+<div class="bg-transparent">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="mt-3 mb-0 flex items-center gap-3 text-left">
+      <img
+        src="Avatar.png"
+        alt="Avatar de Christophe Navaux"
+        width="75" height="75"
+        class="shrink-0 object-cover rounded-md ring-1 ring-slate-900/10 dark:ring-white/10"
+        style="width:2cm;height:2cm;"
+        loading="lazy"
+      />
+      <p class="text-sm md:text-base font-bold text-slate-700 dark:text-slate-200 leading-snug">
+        Website réalisé par Christophe Navaux — EF2D de Mathématiques - Zone Proche-Orient.
+      </p>
+    </div>
+  </div>
+</div>
+  <!-- Hero -->
+  <section id="intro" class="relative">
+    <div class="max-w-6xl mx-auto px-4 py-12 md:py-20 grid md:grid-cols-5 gap-8 items-center">
+      <div class="md:col-span-3">
+        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
+          L'IA dans l'éducation : <span class="text-sky-600">comprendre, choisir, agir</span>
+        </h1>
+        <p class="mt-4 text-base md:text-lg text-slate-600 dark:text-slate-300 text-justify">
+          Les outils d’IA complètent la pédagogie en aidant à différencier, documenter et gagner du temps. Cette page propose une vue claire de quatre solutions ciblées et de leurs cas d’usage concrets à l’école.
+        </p>
+        <div class="mt-6 flex flex-col sm:flex-row gap-3">
+          <a href="#outils" class="inline-flex items-center justify-center rounded-lg bg-sky-600 text-white px-5 py-3 font-semibold shadow hover:bg-sky-700">Découvrir les outils</a>
+          <a href="#comparatif" class="inline-flex items-center justify-center rounded-lg border border-slate-300 dark:border-slate-700 px-5 py-3 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">Voir le comparatif</a>
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <img src="visuel_ia.jpg" alt="Illustration de l'IA en éducation" class="w-full h-auto rounded-xl shadow-lg ring-1 ring-slate-900/5" />
+      </div>
+    </div>
+  </section>
+
+  <main id="contenu" class="max-w-6xl mx-auto px-4">
+    <!-- Outils -->
+    <section id="outils" class="py-10 md:py-14">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Les 4 outils mis en avant</h2>
+      <p class="mb-8 text-slate-600 dark:text-slate-300">Sélection centrée sur des besoins complémentaires : organisation des contenus, visualisation rapide, respect de la vie privée, et conversation en français.</p>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <article class="group rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition-shadow">
+          <h3 class="font-bold text-lg mb-2">NotebookLM</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">Cartes mentales, podcasts et vidéos pédagogiques générés à partir de vos documents.</p>
+          <a href="NotebookLM/notebookLM_infographic.html" class="inline-flex items-center gap-2 text-sky-600 hover:text-sky-700 font-semibold">Voir l’infographie →</a>
+        </article>
+
+        <article class="group rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition-shadow">
+          <h3 class="font-bold text-lg mb-2">Napkin.ai</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">Création d’infographies claires à partir d’idées clés, idéal pour synthèses de cours.</p>
+          <a href="Napkin/napkin_infographic.html" class="inline-flex items-center gap-2 text-amber-700 hover:text-amber-800 font-semibold">Voir l’infographie →</a>
+        </article>
+
+        <article class="group rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition-shadow">
+          <h3 class="font-bold text-lg mb-2">DuckDuckGo AI Chat</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">Conversation IA avec accent sur la vie privée et une interface épurée adaptée aux recherches scolaires.</p>
+          <a href="Duckduckgo/duckduckia_infographic.html" class="inline-flex items-center gap-2 text-cyan-700 hover:text-cyan-800 font-semibold">Voir l’infographie →</a>
+        </article>
+
+        <article class="group rounded-xl border border-slate-200 dark:border-slate-800 p-5 bg-white dark:bg-slate-900 shadow-sm hover:shadow-md transition-shadow">
+          <h3 class="font-bold text-lg mb-2">Le Chat de Mistral</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 mb-4">Assistant conversationnel performant en français, utile pour reformulation, synthèse et idées d’activités.</p>
+          <a href="Le%20chat/le_chat_infographic.html" class="inline-flex items-center gap-2 text-rose-700 hover:text-rose-800 font-semibold">Voir l’infographie →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- Infographies CTA -->
+    <section id="infographies" class="py-10">
+      <div class="rounded-2xl bg-gradient-to-r from-sky-600 via-cyan-500 to-emerald-500 p-1">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div>
+            <h3 class="text-xl md:text-2xl font-extrabold">Découvrez les infographies prêtes à projeter</h3>
+            <p class="text-slate-600 dark:text-slate-300">Utiles en séance plénière ou pour affichages.</p>
+          </div>
+          <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+            <a href="NotebookLM/notebookLM_infographic.html" class="inline-flex justify-center rounded-full bg-sky-600 text-white px-5 py-3 font-semibold shadow hover:bg-sky-700">NotebookLM</a>
+            <a href="Napkin/napkin_infographic.html" class="inline-flex justify-center rounded-full bg-amber-500 text-white px-5 py-3 font-semibold shadow hover:bg-amber-600">Napkin.ai</a>
+            <a href="Duckduckgo/duckduckia_infographic.html" class="inline-flex justify-center rounded-full bg-cyan-600 text-white px-5 py-3 font-semibold shadow hover:bg-cyan-700">DuckDuckGo</a>
+            <a href="Le%20chat/le_chat_infographic.html" class="inline-flex justify-center rounded-full bg-rose-600 text-white px-5 py-3 font-semibold shadow hover:bg-rose-700">Mistral</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Comparatif -->
+    <section id="comparatif" class="py-10 md:py-14">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Comparatif express</h2>
+      <div class="overflow-x-auto ring-1 ring-slate-200 dark:ring-slate-800 rounded-xl">
+        <table class="min-w-full divide-y divide-slate-200 dark:divide-slate-800 text-sm">
+          <thead class="bg-slate-50 dark:bg-slate-800/50">
+            <tr>
+              <th class="px-4 py-3 text-left font-semibold">Critères</th>
+              <th class="px-4 py-3 text-left font-semibold">NotebookLM</th>
+              <th class="px-4 py-3 text-left font-semibold">Napkin.ai</th>
+              <th class="px-4 py-3 text-left font-semibold">DuckDuckGo AI Chat</th>
+              <th class="px-4 py-3 text-left font-semibold">Le Chat de Mistral</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
+            <tr>
+              <td class="px-4 py-3">Usage phare</td>
+              <td class="px-4 py-3">Cartes mentales, podcasts, vidéos</td>
+              <td class="px-4 py-3">Infographies & schémas</td>
+              <td class="px-4 py-3">Recherche privée assistée</td>
+              <td class="px-4 py-3">Conversation FR, synthèses</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3">Points forts pédagogiques</td>
+              <td class="px-4 py-3">Organisation des contenus</td>
+              <td class="px-4 py-3">Visualisation rapide</td>
+              <td class="px-4 py-3">Respect de la vie privée</td>
+              <td class="px-4 py-3">Qualité de langue & reformulation</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-3">Idéal pour</td>
+              <td class="px-4 py-3">Séances de synthèse, révision</td>
+              <td class="px-4 py-3">Affiches, cartes, supports visuels</td>
+              <td class="px-4 py-3">Recherche documentaire en classe</td>
+              <td class="px-4 py-3">Aide aux devoirs, différenciation</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-10 md:py-14">
+      <h2 class="text-2xl md:text-3xl font-extrabold mb-6">Questions fréquentes</h2>
+      <div class="space-y-3">
+        <details class="group rounded-lg border border-slate-200 dark:border-slate-800 p-4 open:shadow-sm">
+          <summary class="flex cursor-pointer items-center justify-between font-semibold">
+            L’IA remplace-t-elle l’enseignant ?
+            <span class="transition-transform group-open:rotate-180">▾</span>
+          </summary>
+          <p class="mt-2 text-slate-600 dark:text-slate-300">Non. Les outils d’IA servent d’assistants : ils accélèrent certaines tâches et aident à personnaliser l’apprentissage, mais le cadrage pédagogique reste humain.</p>
+        </details>
+        <details class="group rounded-lg border border-slate-200 dark:border-slate-800 p-4">
+          <summary class="flex cursor-pointer items-center justify-between font-semibold">
+            Quid de la confidentialité ?
+            <span class="transition-transform group-open:rotate-180">▾</span>
+          </summary>
+          <p class="mt-2 text-slate-600 dark:text-slate-300">Privilégiez des outils qui minimisent la collecte de données et respectent le RGPD. Utilisez des comptes institutionnels si possible.</p>
+        </details>
+        <details class="group rounded-lg border border-slate-200 dark:border-slate-800 p-4">
+          <summary class="flex cursor-pointer items-center justify-between font-semibold">
+            Comment démarrer en classe ?
+            <span class="transition-transform group-open:rotate-180">▾</span>
+          </summary>
+          <ul class="mt-2 list-disc pl-5 text-slate-600 dark:text-slate-300 space-y-1">
+            <li>Commencer par un protocole d’usage clair et des exemples guidés.</li>
+            <li>Préciser les critères d’évaluation (sources, esprit critique, originalité).</li>
+            <li>Favoriser le travail pair-à-pair et la relecture humaine.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-10 border-t border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 py-8 text-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <p class="text-slate-500">© <span id="year"></span> IA & Éducation. Ressources pédagogiques libres à réutiliser en classe.</p>
+      <div class="flex gap-4">
+        <a href="#intro" class="hover:text-sky-600">Haut de page</a>
+        <a href="#comparatif" class="hover:text-sky-600">Comparatif</a>
+        <a href="#faq" class="hover:text-sky-600">FAQ</a>
+      </div>
+      
+    </div>
+  </footer>
+
+  <!-- Bouton retour haut -->
+  <button id="toTop" class="fixed bottom-4 right-4 hidden rounded-full bg-sky-600 text-white p-3 shadow-lg hover:bg-sky-700" aria-label="Revenir en haut">↑</button>
+
+  <script>
+    // === Gestion du thème (stratégie hybride VCA: Valeur, Classe, Auto) ===
+    (function initTheme(){
+      const html = document.documentElement;
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+      html.classList.toggle('dark', theme === 'dark');
+      const icon = document.getElementById('themeIcon');
+      if (icon) icon.textContent = theme === 'dark' ? '🌙' : '🌞';
+    })();
+
+    (function bindThemeToggle(){
+      const btn = document.getElementById('themeToggle');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const html = document.documentElement;
+        const nowDark = !html.classList.contains('dark');
+        html.classList.toggle('dark', nowDark);
+        localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+        const icon = document.getElementById('themeIcon');
+        if (icon) icon.textContent = nowDark ? '🌙' : '🌞';
+      });
+    })();
+
+    // Année courante
+    (function setYear(){
+      const y = document.getElementById('year');
+      if (y) y.textContent = new Date().getFullYear();
+    })();
+
+    // Bouton retour haut
+    (function backToTop(){
+      const toTop = document.getElementById('toTop');
+      if (!toTop) return;
+      const onScroll = () => {
+        if (window.scrollY > 600) toTop.classList.remove('hidden');
+        else toTop.classList.add('hidden');
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      onScroll();
+    })();
+  </script>
+</body>
+</html>

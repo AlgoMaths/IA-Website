@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Napkin.ai — Infographie pédagogique</title>
+  <meta name="description" content="Comment Napkin.ai transforme des idées en infographies claires pour l'enseignement." />
+  <meta name="theme-color" content="#0ea5e9" />
+
+  <!-- Tailwind + dark mode -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script> tailwind.config = { darkMode: 'class' };</script>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root { color-scheme: light dark; }
+    html, body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial; }
+    .glass { backdrop-filter: saturate(1.2) blur(10px); background: rgba(255,255,255,0.75); }
+    .dark .glass { background: rgba(17,24,39,0.6); }
+    .text-justify { text-align: justify; }
+
+    .chart-container { position: relative; width: 100%; max-width: 680px; margin: 0 auto; height: 320px; }
+    @media (min-width: 768px) { .chart-container { height: 360px; } }
+
+    @media print {
+      .print-hidden { display: none !important; }
+      .container { max-width: none !important; padding: 0 !important; }
+      .chart-container { height: 300px !important; max-height: 300px !important; }
+      .text-3xl { font-size: 1.5rem !important; }
+      .text-xl { font-size: 1.1rem !important; }
+      .p-6 { padding: 1rem !important; }
+      .my-2 { margin-top: .5rem !important; margin-bottom: .5rem !important; }
+      body { line-height: 1.3; }
+    }
+  </style>
+</head>
+
+<body class="antialiased bg-slate-50 text-slate-800 dark:bg-slate-900 dark:text-slate-100">
+  <!-- Skip link -->
+  <a href="#contenu" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 px-3 py-2 rounded-md shadow">Aller au contenu</a>
+
+  <!-- Navbar -->
+  <header class="sticky top-0 z-50 border-b border-slate-200/70 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/70 glass print-hidden">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center gap-2">
+        <span class="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-sky-500 text-white font-black">IA</span>
+        <span class="font-extrabold tracking-tight">IA & Éducation</span>
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="../index_ia.html" class="inline-flex items-center rounded-full bg-sky-600 text-white px-4 py-2 text-sm font-semibold shadow hover:bg-sky-700" title="Retour à l’accueil">← Accueil</a>
+        <a href="https://www.napkin.ai/" target="_blank" class="hidden sm:inline-flex items-center rounded-full border border-slate-300 dark:border-slate-700 px-4 py-2 text-sm font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">Visiter Napkin.ai</a>
+        <button id="themeToggle" aria-label="Activer/désactiver le thème" class="inline-flex items-center gap-2 rounded-full border border-slate-300 dark:border-slate-700 px-3 py-1.5 text-sm hover:bg-slate-100 dark:hover:bg-slate-800">
+          <span id="themeIcon">🌞</span><span class="hidden sm:inline">Thème</span>
+        </button>
+      </div>
+    </nav>
+  </header>
+<!-- Crédit + avatar (sous la barre de menu) -->
+<div class="bg-transparent">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="mt-3 mb-0 flex items-center gap-3 text-left">
+      <img
+        src="../Avatar.png"
+        alt="Avatar de Christophe Navaux"
+        width="75" height="75"
+        class="shrink-0 object-cover rounded-md ring-1 ring-slate-900/10 dark:ring-white/10"
+        style="width:2cm;height:2cm;"
+        loading="lazy"
+      />
+      <p class="text-sm md:text-base font-bold text-slate-700 dark:text-slate-200 leading-snug">
+        Website réalisé par Christophe Navaux — EF2D de Mathématiques, zone Proche-orient.
+      </p>
+    </div>
+  </div>
+</div>
+  <!-- Hero -->
+  <section class="relative">
+    <div class="max-w-6xl mx-auto px-4 py-10 md:py-14 grid md:grid-cols-5 gap-8 items-center">
+      <div class="md:col-span-3">
+        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">
+          Napkin.ai : <span class="text-sky-600">la pensée visuelle instantanée</span>
+        </h1>
+        <p class="mt-4 text-base md:text-lg text-slate-600 dark:text-slate-300 text-justify">
+          Transformez notes et idées en <strong>schémas clairs</strong> en un clic. Idéal pour expliciter des concepts, synthétiser un brainstorming, et produire des visuels prêts à projeter en classe.
+        </p>
+        <div class="mt-6 flex flex-col sm:flex-row gap-3 print-hidden">
+          <a href="https://www.napkin.ai/" target="_blank" class="inline-flex items-center justify-center rounded-lg bg-sky-600 text-white px-5 py-3 font-semibold shadow hover:bg-sky-700">Visiter Napkin.ai</a>
+          <button onclick="window.print()" class="inline-flex items-center justify-center rounded-lg border border-slate-300 dark:border-slate-700 px-5 py-3 font-semibold hover:bg-slate-100 dark:hover:bg-slate-800">Imprimer / PDF</button>
+        </div>
+      </div>
+      <div class="md:col-span-2">
+        <img src="./visuel_napkin.jpg" alt="Illustration Napkin.ai" class="w-full h-auto rounded-xl shadow-lg ring-1 ring-slate-900/5">
+      </div>
+    </div>
+  </section>
+
+  <main id="contenu" class="max-w-6xl mx-auto px-4">
+    <!-- Double codage + donut -->
+    <section id="introduction" class="mb-12">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+          <h2 class="text-xl font-extrabold text-sky-700 dark:text-sky-300 mb-2">Principe du double codage</h2>
+          <p class="text-slate-700 dark:text-slate-300 mb-3 text-justify">
+            Le cerveau retient mieux une information présentée <em>en texte et en image</em>. Napkin.ai automatise cette mise en visuel pour renforcer la compréhension et la mémorisation.
+          </p>
+          <p class="text-slate-700 dark:text-slate-300 text-justify">Un simple texte devient un schéma exploitable en cours ou en révisions.</p>
+        </div>
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+          <div class="chart-container"><canvas id="dualCodingChart"></canvas></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="mb-12">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-center mb-6">Fonctionnalités clés</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <article class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-5 text-center">
+          <div class="text-3xl">✍️</div>
+          <h3 class="text-lg font-semibold my-1 text-sky-700 dark:text-sky-300">Texte → Visuel</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 text-justify">Collez un texte et obtenez instantanément un diagramme pertinent.</p>
+        </article>
+        <article class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-5 text-center">
+          <div class="text-3xl">🎨</div>
+          <h3 class="text-lg font-semibold my-1 text-sky-700 dark:text-sky-300">Personnalisation</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 text-justify">Ajustez styles, couleurs et polices pour votre contexte.</p>
+        </article>
+        <article class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-5 text-center">
+          <div class="text-3xl">🔄</div>
+          <h3 class="text-lg font-semibold my-1 text-sky-700 dark:text-sky-300">Multi-formats</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 text-justify">Cartes mentales, organigrammes, arbres de décision, etc.</p>
+        </article>
+        <article class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-5 text-center">
+          <div class="text-3xl">📤</div>
+          <h3 class="text-lg font-semibold my-1 text-sky-700 dark:text-sky-300">Export facile</h3>
+          <p class="text-sm text-slate-600 dark:text-slate-300 text-justify">PNG, SVG ou PDF pour vos documents et slides.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Workflow -->
+    <section id="workflow" class="mb-12">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-center mb-6">Un processus créatif en 3 étapes</h2>
+      <div class="rounded-2xl bg-gradient-to-r from-sky-600 via-cyan-500 to-emerald-500 p-1">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 p-6">
+          <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+            <div class="text-center p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+              <div class="text-4xl">💡</div>
+              <p class="font-semibold mt-1">1. Coller l’idée</p>
+              <p class="text-xs text-slate-600 dark:text-slate-300 text-justify">Entrez notes, extraits ou données.</p>
+            </div>
+            <div class="text-3xl opacity-70">→</div>
+            <div class="text-center p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+              <div class="text-4xl">✨</div>
+              <p class="font-semibold mt-1">2. Générer</p>
+              <p class="text-xs text-slate-600 dark:text-slate-300 text-justify">Obtenez un schéma adapté au contenu.</p>
+            </div>
+            <div class="text-3xl opacity-70">→</div>
+            <div class="text-center p-4 rounded-xl border border-slate-200 dark:border-slate-800">
+              <div class="text-4xl">🚀</div>
+              <p class="font-semibold mt-1">3. Partager</p>
+              <p class="text-xs text-slate-600 dark:text-slate-300 text-justify">Personnalisez et exportez.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Audio -->
+    <section id="audio-player" class="my-12">
+      <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6 text-center">
+        <h2 class="text-2xl font-extrabold mb-2">Écoutez une synthèse</h2>
+        <p class="text-slate-700 dark:text-slate-300 text-justify mb-4">Une capsule audio pour présenter Napkin.ai d’un point de vue pédagogique.</p>
+        <div class="flex justify-center">
+          <audio controls class="w-full max-w-sm">
+            <source src="./podcast_napkin.mp3" type="audio/mpeg">
+            Votre navigateur ne supporte pas l'élément audio.
+          </audio>
+        </div>
+      </div>
+    </section>
+
+    <!-- Use cases + charts -->
+    <section id="use-cases" class="mb-12">
+      <h2 class="text-2xl md:text-3xl font-extrabold text-center mb-6">Des applications pour tous</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+          <h3 class="text-xl font-extrabold text-sky-700 dark:text-sky-300 mb-2">Enseignants</h3>
+          <p class="text-slate-700 dark:text-slate-300 mb-3 text-justify text-sm">Accélère la création de supports, la synthèse de brainstormings et la différenciation.</p>
+          <div class="chart-container"><canvas id="teacherChart"></canvas></div>
+        </div>
+        <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+          <h3 class="text-xl font-extrabold text-sky-700 dark:text-sky-300 mb-2">Élèves</h3>
+          <p class="text-slate-700 dark:text-slate-300 mb-3 text-justify text-sm">Aide à organiser la pensée, structurer projets et réviser visuellement.</p>
+          <div class="chart-container"><canvas id="studentChart"></canvas></div>
+        </div>
+      </div>
+      <div class="rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-sm p-6">
+        <h3 class="text-xl font-extrabold text-sky-700 dark:text-sky-300 mb-2">Administration (PERDIR)</h3>
+        <p class="text-slate-700 dark:text-slate-300 mb-3 text-justify text-sm">Communiquer stratégie, visualiser processus, synthétiser données.</p>
+        <div class="chart-container"><canvas id="adminChart"></canvas></div>
+      </div>
+    </section>
+
+
+    <!-- Capsule YouTube -->
+    <section id="youtube-section" class="mb-12">
+      <div class="rounded-2xl bg-gradient-to-r from-sky-600 via-cyan-500 to-emerald-500 p-[1px]">
+        <div class="rounded-2xl bg-white dark:bg-slate-900 p-6 md:p-8 text-center">
+          <h2 class="text-2xl font-extrabold text-sky-700 dark:text-sky-300 mb-4">Découvrez Napkin.ai en vidéo</h2>
+          <p class="text-slate-700 dark:text-slate-300 text-justify mb-4">
+            Démonstrations et cas d’usage avancés sur ma chaîne YouTube.
+          </p>
+          <div class="w-full aspect-video rounded-lg overflow-hidden shadow mb-4 ring-1 ring-slate-900/10 dark:ring-slate-50/10">
+            <iframe class="w-full h-full"
+              src="https://www.youtube.com/embed/3bs75v1H0fw"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen></iframe>
+          </div>
+          <a href="https://youtube.com/@christophe_navaux?si=x1OQiYlKP8oSXchN" target="_blank" rel="noopener"
+             class="inline-flex items-center bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition-colors duration-300">
+            Visiter ma chaîne YouTube
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-10 border-t border-slate-200 dark:border-slate-800">
+    <div class="max-w-6xl mx-auto px-4 py-8 text-sm flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <p class="text-slate-500">© <span id="year"></span> IA & Éducation — Napkin.ai.</p>
+      <div class="flex gap-4">
+        <a href="../index_ia.html" class="hover:text-sky-600">Accueil</a>
+        <a href="#features" class="hover:text-sky-600">Fonctionnalités</a>
+        <a href="#use-cases" class="hover:text-sky-600">Cas d’usage</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // === Thème (V-C-A) ===
+    (function initTheme(){
+      const html = document.documentElement;
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+      html.classList.toggle('dark', theme === 'dark');
+      const icon = document.getElementById('themeIcon');
+      if (icon) icon.textContent = theme === 'dark' ? '🌙' : '🌞';
+    })();
+
+    (function bindThemeToggle(){
+      const btn = document.getElementById('themeToggle');
+      if (!btn) return;
+      btn.addEventListener('click', () => {
+        const html = document.documentElement;
+        const nowDark = !html.classList.contains('dark');
+        html.classList.toggle('dark', nowDark);
+        localStorage.setItem('theme', nowDark ? 'dark' : 'light');
+        const icon = document.getElementById('themeIcon');
+        if (icon) icon.textContent = nowDark ? '🌙' : '🌞';
+      });
+    })();
+
+    // Année courante
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ==== Charts (reprise adaptée) ====
+    const tooltipTitleCallback = {
+      plugins: { tooltip: { callbacks: {
+        title: function(tooltipItems) {
+          const item = tooltipItems[0];
+          let label = item.chart.data.labels[item.dataIndex];
+          return Array.isArray(label) ? label.join(' ') : label;
+        } } } }
+    };
+    const wrapLabel = (str, maxWidth = 16) => {
+      if (str.length <= maxWidth) return str;
+      const words = str.split(' ');
+      let lines = [], current = '';
+      for (const w of words) {
+        if ((current + w).length > maxWidth) { lines.push(current.trim()); current=''; }
+        current += w + ' ';
+      }
+      lines.push(current.trim());
+      return lines;
+    };
+
+    // Donut: double codage
+    new Chart(document.getElementById('dualCodingChart').getContext('2d'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Rétention visuelle', 'Rétention textuelle'],
+        datasets: [{
+          data: [65, 35],
+          backgroundColor: ['#0ea5e9', '#34d399'],
+          borderColor: '#FFFFFF',
+          borderWidth: 5,
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '70%',
+        plugins: {
+          legend: { position: 'bottom' },
+          title: { display: true, text: 'Impact de la visualisation sur la rétention',
+                   font: { size: 16, weight: 'bold' }, color: '#0369a1', padding: { bottom: 15 } },
+          ...tooltipTitleCallback.plugins
+        }
+      }
+    });
+
+    // Enseignants (bar horizontale)
+    const teacherLabels = ['Création de schémas', 'Infographies de cours', 'Synthèse de brainstorming', 'Différenciation visuelle'].map(l => wrapLabel(l));
+    new Chart(document.getElementById('teacherChart').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: teacherLabels,
+        datasets: [{
+          label: 'Efficacité perçue',
+          data: [90, 85, 95, 80],
+          backgroundColor: ['#0ea5e9', '#22d3ee', '#34d399', '#0369a1'],
+          borderRadius: 5
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+        scales: { x: { beginAtZero: true, max: 100 } },
+        plugins: { legend: { display: false },
+          title: { display: true, text: 'Applications pour les enseignants (%)',
+                   font: { size: 16, weight: 'bold' }, color: '#0369a1', padding: { bottom: 15 } },
+          ...tooltipTitleCallback.plugins
+        }
+      }
+    });
+
+    // Élèves (radar)
+    new Chart(document.getElementById('studentChart').getContext('2d'), {
+      type: 'radar',
+      data: {
+        labels: ['Organisation', 'Prise de notes', 'Structuration', 'Créativité', 'Synthèse'],
+        datasets: [{
+          label: 'Compétences renforcées',
+          data: [9, 8, 8.5, 7, 9.5],
+          backgroundColor: 'rgba(14, 165, 233, .2)',
+          borderColor: '#0ea5e9',
+          pointBackgroundColor: '#0ea5e9',
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: { r: { suggestedMin: 0, suggestedMax: 10 } },
+        plugins: { ...tooltipTitleCallback.plugins }
+      }
+    });
+
+    // PERDIR (bar)
+    const adminLabels = ['Communication stratégique', 'Visualisation de processus', 'Analyse de données', 'Planification de projets'].map(l => wrapLabel(l));
+    new Chart(document.getElementById('adminChart').getContext('2d'), {
+      type: 'bar',
+      data: {
+        labels: adminLabels,
+        datasets: [{
+          label: 'Utilité pour la gestion',
+          data: [85, 95, 75, 90],
+          backgroundColor: ['#0369a1', '#0ea5e9', '#22d3ee', '#34d399'],
+          borderRadius: 5
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        scales: { y: { beginAtZero: true, max: 100 } },
+        plugins: { legend: { display: false },
+          title: { display: true, text: "Cas d'usage pour l'administration (%)",
+                   font: { size: 16, weight: 'bold' }, color: '#0369a1', padding: { bottom: 15 } },
+          ...tooltipTitleCallback.plugins
+        }
+      }
+    });
+  </script>
+</body>
+</html>
